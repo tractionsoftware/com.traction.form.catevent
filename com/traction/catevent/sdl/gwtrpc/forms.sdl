@@ -24,7 +24,7 @@
 
 <!--- Developpers can override these functions. -->
 <sdl.function name="all-field-names">
-  property_catevent_subject,property_location,startend,color,content,tags,property_assigned,property_edit_desc,catevent_category,catevent_type,property_duration,event_target,catevent_relate_crm_company,catevent_relate_crm_contact,catevent_target_crm_goal
+  property_catevent_subject,property_location,startend,color,content,tags,property_assigned,property_edit_desc,catevent_category,catevent_phase,property_duration,event_target,catevent_relate_crm_company,catevent_relate_crm_contact,catevent_target_crm_goal
 </sdl.function>
 
 <sdl.function name="expanded-field-names">

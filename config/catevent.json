@@ -18,9 +18,9 @@
       "type": "labelname_bucket_select",
       "entry_field": "catevent_category"
     },
-    "catevent_type": {
+    "catevent_phase": {
       "type": "labelname_bucket_select",
-      "entry_field": "catevent_type"
+      "entry_field": "catevent_phase"
     },
     "catevent_relate_crm_company": {
       "type": "reference_bucket_select",
@@ -42,9 +42,9 @@
     "catevent": {
       "__inherits": "event",
       "display_name": "#{@catevent#form_catevent_display_name}",
-      //"schema_elements": "project,goal,milestone,title,property_location,property_due,property_enddate,color,content,attachments,tags,property_assigned,property_edit_desc,property_catevent_subject,catevent_category,catevent_type,property_duration,event_target,catevent_relate_crm_company,catevent_relate_crm_contact,property_catevent_customer,catevent_target_crm_goal",
+      //"schema_elements": "project,goal,milestone,title,property_location,property_due,property_enddate,color,content,attachments,tags,property_assigned,property_edit_desc,property_catevent_subject,catevent_category,catevent_phase,property_duration,event_target,catevent_relate_crm_company,catevent_relate_crm_contact,property_catevent_customer,catevent_target_crm_goal",
 
-      "schema_elements": "project,title,property_location,property_due,property_enddate,color,content,attachments,tags,property_assigned,property_edit_desc,property_catevent_subject,catevent_category,catevent_type,property_duration,event_target,catevent_relate_crm_company,catevent_relate_crm_contact,property_catevent_customer,catevent_target_crm_goal",
+      "schema_elements": "project,title,property_location,property_due,property_enddate,color,content,attachments,tags,property_assigned,property_edit_desc,property_catevent_subject,catevent_category,catevent_phase,property_duration,event_target,catevent_relate_crm_company,catevent_relate_crm_contact,property_catevent_customer,catevent_target_crm_goal",
 
       "field_title_value": "[[ /token catevent_title ]]",
       "field_property_duration_placeholder_text": "Auto",
@@ -82,10 +82,10 @@
       "store_type": "journal",
       "property_name": "catevent_category"
     },
-    "catevent_type": {
+    "catevent_phase": {
       "class": "tsi.sdk.data.DynamicSettingValueLabelNameBucket",
       "store_type": "journal",
-      "property_name": "catevent_type"
+      "property_name": "catevent_phase"
     },
     "catevent_target_crm_goal": {
       "display_name": "#{@catevent#entry_field_catevent_target_crm_goal_display_name}",
@@ -118,7 +118,7 @@
       "editentry_singleentry_form": "catevent",
       "newentry_link_text": "#{@catevent#entryclass_catevent_newentry_link_text}",
       "editentry_link_text": "#{@catevent#entryclass_catevent_editentry_link_text}",
-      "labelname_buckets": "tags,color,goal,milestone,catevent_category,catevent_type,catevent_target_crm_goal",
+      "labelname_buckets": "tags,color,goal,milestone,catevent_category,catevent_phase,catevent_target_crm_goal",
       "reference_buckets": "event_target,relationships,catevent_relate_crm_company,catevent_relate_crm_contact",
       "diffsdl": "com.traction.catevent.sdl.token.diff#crm-event",
       "object_single_text": "#{@catevent#entryclass_catevent_object_single_text}",
@@ -152,7 +152,7 @@
     "catevent_category": {
       "sdl": "com.traction.sdl.fields.html#entry-labelname-bucket-value"
     },
-    "catevent_type": {
+    "catevent_phase": {
       "sdl": "com.traction.sdl.fields.html#entry-labelname-bucket-value"
     },
     "catevent_relate_crm_contact": {
@@ -193,12 +193,12 @@
       "filter_group": "events",
       "display_name": "#{@catevent#entry_field_catevent_category_display_name}"
     },
-    "catevent_type": {
+    "catevent_phase": {
       "class": "com.traction.sdk.token.LabelNameBucketEntryField",
-      "label_name_bucket": "catevent_type",
+      "label_name_bucket": "catevent_phase",
       "filter_selectable": "true",
       "filter_group": "events",
-      "display_name": "#{@catevent#entry_field_catevent_type_display_name}"
+      "display_name": "#{@catevent#entry_field_catevent_phase_display_name}"
     },
     "catevent_relate_crm_contact": {
       "class": "com.traction.sdk.token.ReferenceBucketEntryField",
@@ -249,7 +249,7 @@
     "catevent_category": {
       "sdl": "com.traction.sdl.fields.text#entry-labelname-bucket-value"
     },
-    "catevent_type": {
+    "catevent_phase": {
       "sdl": "com.traction.sdl.fields.text#entry-labelname-bucket-value"
     },
     "catevent_relate_crm_contact": {
@@ -330,19 +330,19 @@
       "default": "type=list,name=catevent_category,display_name=#{@catevent#setting_catevent_category_list_display_name},list=#{@catevent#setting_catevent_category_list_opt1}\\,#{@catevent#setting_catevent_category_list_opt2}\\,#{@catevent#setting_catevent_category_list_opt3}\\,#{@catevent#setting_catevent_category_list_opt4}\\,#{@catevent#setting_catevent_category_list_opt5}\\,#{@catevent#setting_catevent_category_list_opt6}\\,#{@catevent#setting_catevent_category_list_opt7}",
       "bucket_name": "catevent_category"
     },
-    "catevent_type": {
+    "catevent_phase": {
       "class": "tsi.sdk.settings.LabelNameBucketData",
-      "display_name": "#{@catevent#setting_catevent_type_display_name}",
-      "description": "#{@catevent#setting_catevent_type_description}",
-      "tip": "#{@catevent#setting_catevent_type_tip}",
+      "display_name": "#{@catevent#setting_catevent_phase_display_name}",
+      "description": "#{@catevent#setting_catevent_phase_description}",
+      "tip": "#{@catevent#setting_catevent_phase_tip}",
       "sdleditor": "com.traction.sdl.admin.settings#labelname-bucket",
       "edit_type": "false",
       "edit_name": "false",
       "edit_display_name": "true",
       "labelname_list_size": "50",
       "usedefault": "true",
-      "default": "type=list,name=catevent_type,display_name=#{@catevent#setting_catevent_type_list_display_name},list=#{@catevent#setting_catevent_type_list_opt1}\\,#{@catevent#setting_catevent_type_list_opt2}\\,#{@catevent#setting_catevent_type_list_opt3}\\,#{@catevent#setting_catevent_type_list_opt4}\\,#{@catevent#setting_catevent_type_list_opt5}",
-      "bucket_name": "catevent_type"
+      "default": "type=list,name=catevent_phase,display_name=#{@catevent#setting_catevent_phase_list_display_name},list=#{@catevent#setting_catevent_phase_list_opt1}\\,#{@catevent#setting_catevent_phase_list_opt2}\\,#{@catevent#setting_catevent_phase_list_opt3}\\,#{@catevent#setting_catevent_phase_list_opt4}\\,#{@catevent#setting_catevent_phase_list_opt5}",
+      "bucket_name": "catevent_phase"
     },
     "catevent_form_loc_type": {
       "class": "com.traction.settings.Select",
@@ -409,7 +409,7 @@
       "description": "#{@catevent#setting_catevent_expanded_form_fields_description}",
       "tip": "#{@catevent#setting_catevent_expanded_form_fields_tip}",
 
-      "options": "property_catevent_subject,property_location,startend,color,content,tags,property_assigned,property_edit_desc,catevent_category,catevent_type,property_duration,event_target,catevent_relate_crm_company,catevent_relate_crm_contact,catevent_target_crm_goal",
+      "options": "property_catevent_subject,property_location,startend,color,content,tags,property_assigned,property_edit_desc,catevent_category,catevent_phase,property_duration,event_target,catevent_relate_crm_company,catevent_relate_crm_contact,catevent_target_crm_goal",
 
 
       "option_property_catevent_subject_label": "#{@catevent#entry_field_catevent_subject_display_name}",
@@ -421,7 +421,7 @@
       "option_property_assigned_label": "#{entry_details_diff_heading_invitees}",
       "option_property_edit_desc_label": "#{editentry_describe_changes_textbox_label}",
       "option_catevent_category_label": "#{@catevent#entry_field_catevent_category_display_name}",
-      "option_catevent_type_label": "#{@catevent#entry_field_catevent_type_display_name}",
+      "option_catevent_phase_label": "#{@catevent#entry_field_catevent_phase_display_name}",
       "option_property_duration_label": "#{entry_taskdetails_heading_duration}",
       "option_event_target_label": "#{referencebucket_event_target_display_name}",
       "option_catevent_relate_crm_company_label": "#{@catevent#entry_field_catevent_relate_crm_company_display_name}",
@@ -434,7 +434,7 @@
       "selecttype": "multi",
       "sdleditor": "com.traction.sdl.admin.settings#groupselect",
       "usedefault": "true",
-      "default": "property_catevent_subject,property_location,startend,color,content,tags,property_assigned,property_edit_desc,catevent_category,catevent_type,event_target,catevent_relate_crm_company,catevent_relate_crm_contact,catevent_target_crm_goal"
+      "default": "property_catevent_subject,property_location,startend,color,content,tags,property_assigned,property_edit_desc,catevent_category,catevent_phase,event_target,catevent_relate_crm_company,catevent_relate_crm_contact,catevent_target_crm_goal"
     },
     "catevent_collapsed_form_fields": {
       "__inherits": "catevent_expanded_form_fields",

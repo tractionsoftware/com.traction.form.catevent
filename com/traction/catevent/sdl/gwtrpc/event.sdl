@@ -162,7 +162,7 @@
     </entry.property.defined>
     <url.modify type="rchron">
       <#row-unless-empty rowClass="category" fieldName="catevent_category" />
-      <#row-unless-empty rowClass="type" fieldName="catevent_type" />
+      <#row-unless-empty rowClass="type" fieldName="catevent_phase" />
     </url.modify>
 
     <#row-unless-empty rowClass="crm-company" fieldName="catevent_relate_crm_company" />
