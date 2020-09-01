@@ -1,0 +1,99 @@
+/*
+.fm-form-catevent {
+  .fm-row-goal {
+    .td234 {
+      .pillbox, .fielddesc {
+        vertical-align: middle;
+      }
+      .fielddesc {
+        display: inline-block;
+        margin: 0 0 0 4px;
+        i {
+          @include fontawesome-basic;
+          color: #999;
+          padding-right: 0.25em;
+          &:before {
+            content: "\f067";
+            speak: none;
+          }
+        }
+      }
+    }
+  }
+}
+*/
+/* line 64, ../../scss/catevent/catevent.scss */
+.fm-form-eventitem .Caption i {
+  font-family: FontAwesome;
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  padding-right: 0.41667em;
+}
+/* line 73, ../../scss/catevent/catevent.scss */
+.fm-form-eventitem .Caption i:before {
+  content: "\f073";
+  display: inline-block;
+  speak: none;
+}
+/* line 78, ../../scss/catevent/catevent.scss */
+.fm-form-eventitem tr td {
+  padding: 2px 0;
+}
+/* line 80, ../../scss/catevent/catevent.scss */
+.fm-form-eventitem tr.fm-row-customer .td2 input {
+  width: 100%;
+}
+/* line 82, ../../scss/catevent/catevent.scss */
+.fm-form-eventitem tr.hidden {
+  display: none;
+}
+/* line 87, ../../scss/catevent/catevent.scss */
+.fm-form-eventitem tr.fm-row-crm-goal .combobox-entries i {
+  margin-right: 4px;
+  display: inline-block;
+  font-family: FontAwesome;
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+/* line 91, ../../scss/catevent/catevent.scss */
+.fm-form-eventitem tr.fm-row-crm-goal .combobox-entries i:before {
+  content: "\f0ae";
+  speak: none;
+}
+/* line 96, ../../scss/catevent/catevent.scss */
+.fm-form-eventitem tr.fm-row-crm-goal .combobox-entries span.s {
+  display: inline-block;
+  color: #999;
+  font-size: 0.8em;
+  line-height: 15px;
+  padding: 0 4px 0 0;
+  color: #666;
+}
+
+/* line 116, ../../scss/catevent/catevent.scss */
+.fi .ft .task-feed-details .v > a.label-sticker:hover {
+  color: white;
+  filter: brightness(120%);
+  text-decoration: none;
+}
+
+/* line 131, ../../scss/catevent/catevent.scss */
+.catevent-details-table tr.crm-company .v a.label-sticker, .catevent-details-table tr.crm-contact .v a.label-sticker {
+  color: white;
+  font-weight: normal;
+  margin-left: 0;
+  margin-right: 1px;
+  font-size: 100%;
+}
+/* line 137, ../../scss/catevent/catevent.scss */
+.catevent-details-table tr.crm-company .v a.label-sticker:hover, .catevent-details-table tr.crm-contact .v a.label-sticker:hover {
+  color: white;
+  filter: brightness(120%);
+  text-decoration: none;
+}

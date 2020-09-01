@@ -1,0 +1,111 @@
+<!---
+
+      Traction Software, Inc. Confidential and Proprietary Information
+
+      Copyright (c) 1996-2020 Traction Software, Inc.
+      All rights reserved.
+
+-->
+
+<!--- PLEASE DO NOT DELETE THIS LINE - make copyright depends on it. -->
+
+<sdl.function name="crm-event-company">
+  <!--- Set maxResults="" to enable the loop of the entry.field.labels tag.
+        If multiple targets are set, the field should display the exclamation icon. -->
+  <#labelname-bucket-target targetType="crm_company" enableFQID="true" maxResults="" />
+</sdl.function>
+
+<sdl.function name="crm-goal">
+  <entry.goals entrytypesfilter="crm_goal">
+    <a class="crm-goal" href="__entry.url__" title="__entry.tractionid__: __entry.titletext__">__entry.titletext__</a>
+    <#styled-target-none />
+  </entry.goals>
+</sdl.function>
+
+<sdl.function name="labelname-bucket-target">
+  <entry.field.labels max="<variable.local.value name='maxResults' default='1' />">
+    <#styled-target-none />
+    <var.boolean name="enableFQID" default="false">
+      <var.set name="fqid">__label.labelname.tractionid.fqid__</var.set>
+    </var.boolean>
+    <loop.only not><i class="alert"></i></loop.only>
+    <#styled-target url="__label.labelname.tractionid.url__" display="__label.displayname__" />
+  </entry.field.labels>
+</sdl.function>
+
+<sdl.function name="reference-bucket-target">
+  <entry.field.references max="<variable.local.value name='maxResults' default='1' />">
+    <#styled-target-none />
+    <entry type="single" fqid="__entry.field.value__">
+      <#styled-target url="__entry.url__" display="__entry.title__" />
+    </entry>
+  </entry.field.references>
+</sdl.function>
+
+<sdl.function name="styled-target">
+  <span class="catevent-target catevent-target-${targetType}"><a href="${url}"<var.defined name="fqid"> data-fqid="${fqid}"</var.defined>><i></i>${display}</a><*after-styled-target *default="" /></span>
+</sdl.function>
+
+<sdl.function name="styled-target-none">
+  <loop.none>
+    <com.traction.sdl.fields.html#styled-none />
+  </loop.none>
+</sdl.function>
+
+<sdl.function name="event-duration-ev-hours-formatted">
+  <var.set name="value">
+    <#event-duration-ev-hours-formatted-value />
+  </var.set>
+  <var.value name="value" default="${default}" />
+</sdl.function>
+
+<sdl.function name="event-duration-ev-hours-formatted-value">
+  <var.set name="dur">
+    <jeval roundingfactor="0.01"><entry.field name="event_duration">__entry.field.value__</entry.field> / 3600 / 1000</jeval>
+  </var.set>
+  <config.entryfield.boolean name="duration_format_taskEffort" default="false">
+    <duration.format hours="<var.value name='dur' default='0' />" taskEffort="true" />
+  <else>
+    <duration.format hours="<var.value name='dur' default='0' />" roundUnits="min" />
+  </config.entryfield.boolean>
+</sdl.function>
+
+<sdl.function name="event-duration-eprop-hours-formatted">
+  <var.set name="value">
+    <#event-duration-eprop-hours-formatted-value />
+  </var.set>
+  <var.value name="value" default="${default}" />
+</sdl.function>
+
+<sdl.function name="event-duration-eprop-hours-formatted-value">
+  <var.set name="dur">
+    <entry.field name="duration">__entry.field.value__</entry.field>
+  </var.set>
+  <config.entryfield.boolean name="duration_format_taskEffort" default="false">
+    <duration.format hours="<var.value name='dur' default='0' />" taskEffort="true" />
+  <else>
+    <duration.format hours="<var.value name='dur' default='0' />" roundUnits="min" />
+  </config.entryfield.boolean>
+</sdl.function>
+
+<sdl.function name="event-duration-calc-hours-formatted">
+  <var.set name="value">
+    <#event-duration-calc-hours-formatted-value />
+  </var.set>
+  <var.value name="value" default="${default}" />
+</sdl.function>
+
+<sdl.function name="event-duration-calc-hours-formatted-value">
+  <var.set name="dur">
+    <entry.property.defined name="duration">
+      <entry.property.value name="duration" />
+    <else>
+      <jeval roundingfactor="0.01"><entry.field name="event_duration">__entry.field.value__</entry.field> / 3600 / 1000</jeval>
+    </entry.property.defined>
+  </var.set>
+  <config.entryfield.boolean name="duration_format_taskEffort" default="false">
+    <duration.format hours="<var.value name='dur' default='0' />" taskEffort="true" />
+  <else>
+    <duration.format hours="<var.value name='dur' default='0' />" roundUnits="min" />
+  </config.entryfield.boolean>
+</sdl.function>

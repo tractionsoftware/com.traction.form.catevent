@@ -1,0 +1,186 @@
+<!---
+
+      Traction Software, Inc. Confidential and Proprietary Information
+
+      Copyright (c) 1996-2020 Traction Software, Inc.
+      All rights reserved.
+
+-->
+
+<!--- PLEASE DO NOT DELETE THIS LINE - make copyright depends on it. -->
+
+<sdl.import name="single" template="com.traction.sdl.gwtrpc.single" />
+<sdl.import name="shared" template="com.traction.sdl.gwtrpc.shared" />
+
+<sdl.function name="data-table-section">
+  <#summary-header />
+  <#details-table />
+</sdl.function>
+
+<!---
+  Summary Information Section (Summary and Action Buttons)
+-->
+<sdl.function name="summary-header">
+  <div class="summary-header catevent">
+    <#summary-details />
+    <#summary-actions />
+  </div>
+</sdl.function>
+
+<sdl.function name="summary-details">
+  <div class="summary-details">
+    <foreach list="<#summary-details-fields />">
+      <switch value="__foreach.current__">
+        <case value="start_or_date">
+          <#summary-start-or-date />
+        </case>
+        <case.default>
+          <#summary-default-item />
+        </case.default>
+      </switch>
+    </foreach>
+    <#collapse-expand-link />
+  </div>
+</sdl.function>
+
+<sdl.function name="summary-details-fields">
+  start_or_date,invitees,catevent_category,catevent_relate_crm_company
+</sdl.function>
+
+<sdl.function name="collapse-expand-link">
+  <span class="exp label-sticker lightgray">
+    <a class="collapsed" onclick="<#exp-on-click />"><i></i></a>
+  </span>
+</sdl.function>
+
+<sdl.function name="exp-on-click">
+  <!--- Hide and expand the task-details. -->
+  if ($(this).hasClass('collapsed')) {
+    $(this).removeClass('collapsed').addClass('expanded');
+
+    // For the time being, as a workaround (JPBO25534)
+    $('.entry-catevent #title-info .entry-details > .task-details').removeClass('hide-by-default');
+
+    <!--- Single View -->
+    $('.entry-catevent #title-info .entry-details > .task-details').removeClass('collapsed').addClass('expanded').stop().slideDown('fast');
+    <!--- Calendar Dialog -->
+    $(this).parents('.feed-details').children('.task-details').removeClass('collapsed').addClass('expanded').stop().slideDown('fast');
+  } else {
+    $(this).removeClass('expanded').addClass('collapsed');
+    <!--- Single View -->
+    $('.entry-catevent #title-info .entry-details > .task-details').removeClass('expanded').addClass('collapsed').stop().slideUp('fast');
+    <!--- Calendar Dialog -->
+    $(this).parents('.feed-details').children('.task-details').removeClass('expanded').addClass('collapsed').stop().slideUp('fast');
+  }
+
+
+</sdl.function>
+
+<sdl.function name="summary-default-item">
+  <entry.field name="__foreach.current__">
+    <compare.equals "__entry.field.value__" "" trim="true" not>
+      <switch value="__foreach.current__">
+        <case value="invitees">
+          __entry.field.content__
+        </case>
+        <case.default>
+          <#summary-details-pillbox inner="<#strip-content>__entry.field.content__</#strip-content>" />
+        </case.default>
+      </switch>
+    </compare.equals>
+  </entry.field>
+</sdl.function>
+
+<sdl.function name="summary-start-or-date">
+  <entry.calendar.daterange>
+    <entry.calendar.daterange.fullsingleday>
+      <!--- console>just show one</console -->
+      <#summary-details-pillbox inner="<entry.field name='event_date'>__entry.field.content__</entry.field>" />
+    <else>
+      <!--- console>show start</console -->
+      <#summary-details-pillbox inner="<entry.field name='event_start'>__entry.field.content__</entry.field>" />
+    </entry.calendar.daterange.fullsingleday>
+  </entry.calendar.daterange>
+</sdl.function>
+
+<sdl.function name="summary-details-pillbox">
+  <span class="__entry.field.name__<#label-class /><var.defined name='class'> ${class}</var.defined>" title="__entry.field.displayname__"<var.defined name="dataCount"> data-count="${dataCount}"</var.defined><var.defined name="style"> style="${style}"</var.defined>>
+    ${inner}
+  </span>
+</sdl.function>
+
+<sdl.function name="label-class">
+  <compare.equals "__entry.field.name__" "assigned" "subscribed" "priority" not> label-sticker</compare.equals>
+</sdl.function>
+
+<sdl.function name="strip-content">
+  <transform.html2plaintext withEntities="false">
+    <*yield />
+  </transform.html2plaintext>
+</sdl.function>
+
+<sdl.function name="summary-actions">
+  <compare.equals "<config.view.value name='viewtype' />" "single">
+    <div class="button-group-dark entry-actions">
+      <#viewaction-button actionName="Update" buttonClass="edit" buttonText="#{action_Update_entry}" />
+      <#viewaction-button actionName="Erase" buttonClass="erase" buttonText="#{action_Erase_tool}" />
+    </div>
+  </compare.equals>
+</sdl.function>
+
+<sdl.function name="viewaction-button">
+  <viewaction name="${actionName}" extras="<variable.value name='extras' />">
+    <a <shared#viewaction-href-or-region /> class="button<var.defined name='buttonClass'> ${buttonClass}</var.defined>"<var.defined name="buttonTitle"> title="${buttonTitle}"</var.defined>><i></i><var.value name="buttonText" default="__viewaction.displayname__" /></a>
+  </viewaction>
+</sdl.function>
+
+<!---
+  Entry Details Table
+-->
+<sdl.function name="details-table">
+  <single#details-table containerClass="task-details catevent-details-table-container hide-by-default" tableClass="catevent-details-table">
+    <#row-unless-empty rowClass="location" fieldName="location" />
+    <#row-unless-empty rowClass="invitees" fieldName="invitees" />
+    <entry.calendar.daterange>
+      <entry.calendar.daterange.fullsingleday>
+        <!-- just show one -->
+        <single#details-table-row-entry-field fieldName="event_date" />
+      <else>
+        <!-- show both -->
+        <single#details-table-row-entry-field fieldName="event_start" />
+        <single#details-table-row-entry-field fieldName="event_end" />
+      </entry.calendar.daterange.fullsingleday>
+    </entry.calendar.daterange>
+    <entry.property.defined name="duration">
+      <compare.equals "<entry.property.value name='duration' />" "" trim="true">
+        <#row-unless-empty rowClass="event_duration" fieldName="event_duration" label="#{entry_taskdetails_heading_duration}" />
+      <else>
+        <#row-unless-empty rowClass="duration" fieldName="duration" label="#{entry_taskdetails_heading_duration}" />
+      </compare.equals>
+    <else>
+      <#row-unless-empty rowClass="event_duration" fieldName="event_duration" label="#{entry_taskdetails_heading_duration}" />
+    </entry.property.defined>
+    <url.modify type="rchron">
+      <#row-unless-empty rowClass="category" fieldName="catevent_category" />
+      <#row-unless-empty rowClass="type" fieldName="catevent_type" />
+    </url.modify>
+
+    <#row-unless-empty rowClass="crm-company" fieldName="catevent_relate_crm_company" />
+    <#row-unless-empty rowClass="crm-contact" fieldName="catevent_relate_crm_contact" />
+    <#row-unless-empty rowClass="crm-goal" fieldName="catevent_target_crm_goal" />
+
+    <single#details-table-row-entry-field fieldName="catevent_target_crm_goal" />
+
+    <#row-unless-empty rowClass="customer" fieldName="catevent_customer" />
+
+  </single#details-table>
+</sdl.function>
+
+<sdl.function name="row-unless-empty">
+  <entry.field name="${fieldName}">
+    <!--- console>${fieldName} = __entry.field.value__</console -->
+    <compare.equals "__entry.field.value__" "" trim="true" not>
+      <single#details-table-row-entry-field rowClass="${rowClass}" fieldName="${fieldName}" />
+    </compare.equals>
+  </entry.field>
+</sdl.function>

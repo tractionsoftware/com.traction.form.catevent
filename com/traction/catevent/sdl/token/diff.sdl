@@ -1,0 +1,19 @@
+<!---
+
+      Traction Software, Inc. Confidential and Proprietary Information
+
+      Copyright (c) 1996-2020 Traction Software, Inc.
+      All rights reserved.
+
+-->
+
+<!--- PLEASE DO NOT DELETE THIS LINE - make copyright depends on it. -->
+
+<sdl.function name="crm-event"><?sdl text="true"?>
+#{entry_details_diff_heading_location}: <entry.property.value name="location" />
+<entry.calendar.daterange>#{entry_details_diff_heading_allday}: <com.traction.sdl.tasks.tasks#diffversion-event-allday />
+#{entry_details_diff_heading_event_start}: <com.traction.sdl.tasks.tasks#diffversion-event-start />
+#{entry_details_diff_heading_event_end}: <com.traction.sdl.tasks.tasks#diffversion-event-end /></entry.calendar.daterange>
+#{entry_details_diff_heading_invitees}: <com.traction.sdl.tasks.tasks#diffversion-property-users property="assigned" />
+#{@catevent#entry_field_catevent_customer_display_name}: <entry.property.value name="catevent_customer" />
+<?sdl text="false"?></sdl.function>

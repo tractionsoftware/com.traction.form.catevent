@@ -1,0 +1,22 @@
+<!---
+
+      Traction Software, Inc. Confidential and Proprietary Information
+
+      Copyright (c) 1996-2020 Traction Software, Inc.
+      All rights reserved.
+
+-->
+
+<!--- PLEASE DO NOT DELETE THIS LINE - make copyright depends on it. -->
+
+<sdl.function name="event-duration-ev-hours-formatted">
+  <text#event-duration-ev-hours-formatted />
+</sdl.function>
+
+<sdl.function name="event-duration-eprop-hours-formatted">
+  <text#event-duration-eprop-hours-formatted />
+</sdl.function>
+
+<sdl.function name="event-duration-calc-hours-formatted">
+  <text#event-duration-calc-hours-formatted />
+</sdl.function>

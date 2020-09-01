@@ -1,0 +1,106 @@
+plugin_display_name=カテゴリー付き予定 (CatEvent)
+plugin_description=このプラグインは、標準の予定（イベント）の投稿/編集フォームに、所要時間、カテゴリー、CRM 取引先、CRM 名刺などのフィールド（入力欄）を追加します。
+
+# Form
+form_catevent_display_name=予定エディター
+
+# Form Help
+help_title_property_duration=所要時間
+help_msg_property_duration=この予定の所要時間は開始日時と終了日時から把握できますが、別の所要時間を設定したい場合は、ここでその時間を入力できます。
+help_title_crm_company=取引先と関連付ける
+help_msg_crm_company=この予定をCRMの取引先と関連付けられます。欄の中に文字を入力して検索し、目的の取引先を選択してください。
+help_title_crm_contact=名刺と関連付ける
+help_msg_crm_contact=この予定をCRMの名刺と関連付けられます。欄の中に文字を入力して検索し、目的の名刺を選択してください。
+help_title_crm_opportunity=案件と関連付ける
+help_msg_crm_opportunity=この予定をCRMの案件と関連付けられます。欄の中に文字を入力して検索し、目的の案件を選択してください。
+
+# Simple Form
+button_text_expand=詳細表示
+button_text_collapse=簡易表示
+
+# Entry Class
+entryclass_catevent_display_name=予定
+entryclass_catevent_newentry_link_text=新しい予定
+entryclass_catevent_editentry_link_text=予定の編集
+entryclass_catevent_object_single_text=予定
+entryclass_catevent_object_single_indefinite_text=予定
+
+# Index Type
+indexentrytype_catevent_display_name=予定
+indexentrytype_type_filter_display_name=予定
+
+# Entry Fields
+entry_field_catevent_subject_display_name=タイトル
+entry_field_catevent_customer_display_name=顧客名
+entry_field_catevent_category_display_name=カテゴリー
+entry_field_catevent_type_display_name=タイプ
+entry_field_catevent_relate_crm_contact_display_name=名刺 (CRM)
+entry_field_catevent_relate_crm_company_display_name=取引先 (CRM)
+entry_field_catevent_target_crm_goal_display_name=案件 (CRM)
+entry_field_event_dur_ev_display_name=時間 (ev)
+entry_field_event_dur_eprop_display_name=時間 (eprop)
+entry_field_event_dur_calc_display_name=時間
+
+# Settings
+setting_catevent_category_display_name=カテゴリー タグ グループ
+setting_catevent_category_description=フォームの [カテゴリー] ドロップダウンに表示されるタグを設定します。
+setting_catevent_category_tip=ひとつずつ改行してください。
+setting_catevent_category_list_display_name=カテゴリー
+setting_catevent_category_list_opt1=月次:会計
+setting_catevent_category_list_opt2=月次:報告書
+setting_catevent_category_list_opt3=月次:訪問
+setting_catevent_category_list_opt4=年次:決算
+setting_catevent_category_list_opt5=年次:年末調整
+setting_catevent_category_list_opt6=スポット:社会保険
+setting_catevent_category_list_opt7=スポット:税金相談
+
+setting_catevent_type_display_name=タイプ タグ グループ
+setting_catevent_type_description=フォームの [タイプ] ドロップダウンに表示されるタグを設定します。
+setting_catevent_type_tip=ひとつずつ改行してください。
+setting_catevent_type_list_display_name=タイプ
+setting_catevent_type_list_opt1=特大
+setting_catevent_type_list_opt2=大
+setting_catevent_type_list_opt3=中
+setting_catevent_type_list_opt4=小
+setting_catevent_type_list_opt5=極小
+
+setting_catevent_form_loc_type_display_name=投稿/編集フォームのロケーター タイプ
+setting_catevent_form_loc_type_description=投稿/編集フォームの上部に、[スペース] に加えて [プロジェクト] と [マイルストーン] のドロップダウンリストを表示するかどうかを選択します。
+setting_catevent_form_loc_type_tip=
+setting_catevent_form_loc_type_projgoalms_label=スペース, プロジェクト, マイルストーン
+setting_catevent_form_loc_type_projgoal_label=スペース, プロジェクト
+setting_catevent_form_loc_type_proj_label=スペースだけ
+
+setting_catevent_display_event_target_field_display_name=[予定追加先] 欄を表示
+setting_catevent_display_event_target_field_description=ここで [はい] を選択すると、投稿/編集フォームに [予定追加先] 欄が表示され、作成中の予定記事が紐付けられる記事や段落を確認したり変更したりできるようになります。
+setting_catevent_display_event_target_field_tip=
+
+setting_catevent_display_crm_company_target_field_display_name=[CRM 取引先] 欄を表示
+setting_catevent_display_crm_company_target_field_description=ここで [はい] を選択すると、投稿/編集フォームに [CRM 取引先] 欄が表示され、CRM の取引先記事と関連付けられます。
+setting_catevent_display_crm_company_target_field_tip=CRM プラグインが必要
+
+setting_catevent_display_crm_contact_target_field_display_name=[CRM 名刺] 欄を表示
+setting_catevent_display_crm_contact_target_field_description=ここで [はい] を選択すると、投稿/編集フォームに [CRM 取引先] 欄が表示され、CRM の名刺記事と関連付けられます。
+setting_catevent_display_crm_contact_target_field_tip=CRM プラグインが必要
+
+setting_catevent_display_crm_goal_target_field_display_name=[CRM 案件] 欄を表示
+setting_catevent_display_crm_goal_target_field_description=ここで [はい] を選択すると、投稿/編集フォームに [CRM 案件] 欄が表示されます。<br>注意: この [CRM 案件] 欄は標準の [プロジェクト] 欄と同時に表示することはできません。[CRM 案件] 欄を表示する場合は、[投稿/編集フォームのロケーター タイプ] 設定で [スペースだけ] を選択してください。
+setting_catevent_display_crm_goal_target_field_tip=CRM プラグインが必要
+
+setting_catevent_display_customer_field_display_name=[顧客名] 欄を表示
+setting_catevent_display_customer_field_description=ここで [はい] を選択すると、投稿/編集フォームに [顧客名] 欄が表示されます。
+setting_catevent_display_customer_field_tip=CRM プラグインが未インストールの場合のみ表示
+
+setting_catevent_title_format_display_name=タイトルの書式
+setting_catevent_title_format_description=予定記事のタイトルは、ここで設定された書式で表示されます。<br>\
+利用可能: %subject%, %entryid%, %space%, %date%, %location%, %start%, %end%, %invitee%, %author%, %category%, %type%
+setting_catevent_title_format_tip=
+setting_catevent_title_format_default=%category% %subject%
+
+setting_catevent_expanded_form_fields_display_name=展開フォームに表示
+setting_catevent_expanded_form_fields_description=ここで選択されたフィールド（欄）が展開されたフォームに表示されます。
+setting_catevent_expanded_form_fields_tip=
+
+setting_catevent_collapsed_form_fields_display_name=折りたたみフォームに表示
+setting_catevent_collapsed_form_fields_description=ここで選択されたフィールド（欄）が折りたたんだフォームに表示されます。注意: 上の [展開フォームに表示] で選択されていないフィールド（欄）は、折りたたみフォームには表示されません。
+setting_catevent_collapsed_form_fields_tip=

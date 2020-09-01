@@ -1,0 +1,281 @@
+<!---
+
+      Traction Software, Inc. Confidential and Proprietary Information
+
+      Copyright (c) 1996-2020 Traction Software, Inc.
+      All rights reserved.
+
+-->
+
+<!--- PLEASE DO NOT DELETE THIS LINE - make copyright depends on it. -->
+
+<sdl.import name="dbtoolslib" template="com.traction.sdl.misc.dbtoolslib" />
+
+<dbtoolslib#view *body="<#body />" />
+
+<sdl.function name="body">
+
+  <h1>CatEvent DB Tools</h1>
+
+  <#menu />
+
+  <dbtoolslib#import-stats importer="catevent" />
+
+  <db.connect>
+
+    <switch value="#$op$">
+
+      <case value="none">
+      </case>
+
+      <case value="show">
+        <#show />
+      </case>
+
+      <case value="show-all">
+        <#show all="true" />
+      </case>
+
+      <case value="adv">
+        <#adv />
+      </case>
+
+      <case value="drop">
+        <#drop />
+      </case>
+
+      <case value="init">
+        <#init />
+      </case>
+
+      <case value="clean">
+        <#clean />
+      </case>
+
+      <case.default>
+        <#other-op />
+      </case.default>
+
+    </switch>
+
+  </db.connect>
+
+</sdl.function>
+
+<sdl.function name="menu">
+  <dbtoolslib#default-menu />
+</sdl.function>
+
+<sdl.function name="adv">
+  <dbtoolslib#adv *adv-options="<#adv-options />" />
+</sdl.function>
+
+<sdl.function name="other-op">
+  <dbtoolslib#unknown-op />
+</sdl.function>
+
+<sdl.function name="adv-options">
+  <join separator=" | ">
+    <dbtoolslib#op-button buttonOp="drop" buttonText="Erase Schema">__join.separator__
+    <dbtoolslib#op-button buttonOp="init" buttonText="Erase+Install Schema">__join.separator__
+    <dbtoolslib#op-button buttonOp="clean" buttonText="Erase+Install+Import (Clean)">
+  </join>
+</sdl.function>
+
+<sdl.function name="show">
+  <h2>Showing <variable.boolean name="all">ALL</variable.boolean> rows...</h2>
+  <schema#checkInstall />
+  <variable.global.boolean name="installed">
+    <#show-tables />
+  <else>
+    <h3>(CatEvent tables do not exist)</h3>
+  </variable.global.boolean>
+</sdl.function>
+
+<sdl.function name="drop">
+  <#adv />
+  <schema#checkInstall />
+  <variable.global.boolean name="installed">
+    <h2>Dropping CatEvent tables...</h2>
+    <log type="traction">__journalrequest.user.name__ requested that the CatEvent database tables be erased.</log>
+    <import.task.setuplock importer="catevent">
+      <schema#dropSchema />
+    </import.task.setuplock>
+    <schema#checkInstall />
+    <variable.global.boolean name="installed">
+      <h3>ERROR: tables still exists</h3>
+    <else>
+      <h3>Confirmed</h3>
+    </variable.global.boolean>
+  <else>
+    <h2>No schema installed</h2>
+  </variable.global.boolean>
+</sdl.function>
+
+<sdl.function name="init">
+  <#adv />
+  <h2>Dropping and recreating CatEvent tables...</h2>
+  <schema#import-all-task-setup />
+  <log type="traction">__journalrequest.user.name__ requested that the CatEvent database tables be erased and recreated.</log>
+  <schema#checkInstall />
+  <variable.global.boolean name="installed">
+    <h3>Confirmed</h3>
+  <else>
+    <h2>Failed to install schema</h2>
+  </variable.global.boolean>
+</sdl.function>
+
+<sdl.function name="clean">
+
+  <#adv />
+
+  <import.task.request importer="catevent">
+    <h2>Importing CatEvent data from journal</h2>
+    <import.task.progress importer="catevent" denied="ignore">
+      <h3>status: ${status} - ${counts}</h3>
+    </import.task.progress>
+    <p>You can monitor progress in the log file. See <a href="/rs/threadman" target="_blank">the thread manager</a> to track the task.</p>
+  <else>
+    <h3>Request for CatEvent Data Full Import failed</h3>
+    <div class="error">${errorMessage}</div>
+  </import.task.request>
+
+</sdl.function>
+
+<sdl.function name="show-tables">
+
+  <h2>CatEvent Schema Version ${version}</h2>
+
+  <h3><dbtoolslib#show-table-heading tableName="TSI_PM_EV_CAT" /></h3>
+  <#event-results sql="select * from TSI_PM_EV_CAT order by DATE asc, TITLE asc">
+  <br><br>
+
+  <h3><dbtoolslib#show-table-heading tableName="TSI_PM_EV_CAT_CRM_COMPANY" /></h3>
+  <#target-crm-company-results sql="select * from TSI_PM_EV_CAT_CRM_COMPANY order by DATE desc, ENTRYID desc">
+  <br><br>
+
+  <h3><dbtoolslib#show-table-heading tableName="TSI_PM_EV_CAT_CRM_CONTACT" /></h3>
+  <#target-crm-contact-results sql="select * from TSI_PM_EV_CAT_CRM_CONTACT order by DATE desc, ENTRYID desc">
+  <br><br>
+
+</sdl.function>
+
+<sdl.function name="event-results">
+  <var.set name="cols">ENTRYID,PROJID,TITLE,DATE,DISPLAYTYPE,LOCATION,DATEDUR,PROPDUR,DUR,CUST,TYPE,TYPE1,TYPE2,CAT,CAT1,CAT2</var.set>
+  <table class="dump">
+    <thead>
+      <tr>
+        <th>&nbsp;</th>
+        <foreach list="${cols}">
+          <th class="__foreach.current__"><span title="__foreach.current__">__foreach.current__</span></th>
+        </foreach>
+      </tr>
+    </thead>
+    <tbody>
+    <db.query sql="#$sql$" max="<dbtoolslib#query-rows-max />">
+      <tr>
+        <td>__loop.index__</td>
+        <foreach list="${cols}">
+          <switch value="__foreach.current__">
+            <case value="ENTRYID">
+              <td class="__foreach.current__" title="__foreach.current__"><dbtoolslib#result-column-fqid2entry fqidColumnName="__foreach.current__" /></td>
+            </case>
+            <case value="PROJID">
+              <td class="__foreach.current__" title="__foreach.current__"><dbtoolslib#result-column-projectId2project projectIdColumnName="__foreach.current__" /></td>
+            </case>
+            <case.default>
+              <td class="__foreach.current__" title="__foreach.current__"><html.encode>#$db.query.result[__foreach.current__]$</html.encode></td>
+            </case.default>
+          </switch>
+        </foreach>
+      </tr>
+      <loop.none>
+        <tr>
+          <td colspan="<foreach list='${cols}'><loop.last><jeval>__loop.index__ + 1</jeval></loop.last></foreach>">
+            No rows.
+          </td>
+        </tr>
+      </loop.none>
+    </db.query></tbody>
+  </table>
+</sdl.function>
+
+<sdl.function name="target-crm-company-results">
+  <var.set name="cols">UUID,DATE,ENTRYID,COMPANYID</var.set>
+  <table class="dump">
+    <thead>
+      <tr>
+        <th>&nbsp;</th>
+        <foreach list="${cols}">
+          <th class="__foreach.current__"><span title="__foreach.current__">__foreach.current__</span></th>
+        </foreach>
+      </tr>
+    </thead>
+    <tbody>
+    <db.query sql="#$sql$" max="<dbtoolslib#query-rows-max />">
+      <tr>
+        <td>__loop.index__</td>
+        <foreach list="${cols}">
+          <switch value="__foreach.current__">
+            <case value="ENTRYID">
+              <td class="__foreach.current__" title="__foreach.current__"><dbtoolslib#result-column-fqid2entry fqidColumnName="__foreach.current__" /></td>
+            </case>
+            <case value="COMPANYID">
+              <td class="__foreach.current__" title="__foreach.current__"><dbtoolslib#result-column-fqid2entry fqidColumnName="__foreach.current__" /></td>
+            </case>
+            <case.default>
+              <td class="__foreach.current__" title="__foreach.current__"><html.encode>#$db.query.result[__foreach.current__]$</html.encode></td>
+            </case.default>
+          </switch>
+        </foreach>
+      </tr>
+      <loop.none>
+        <tr>
+          <td colspan="<foreach list='${cols}'><loop.last><jeval>__loop.index__ + 1</jeval></loop.last></foreach>">
+            No rows.
+          </td>
+        </tr>
+      </loop.none>
+    </db.query></tbody>
+  </table>
+</sdl.function>
+
+<sdl.function name="target-crm-contact-results">
+  <var.set name="cols">UUID,DATE,ENTRYID,CONTACTID</var.set>
+  <table class="dump">
+    <thead>
+      <tr>
+        <th>&nbsp;</th>
+        <foreach list="${cols}">
+          <th class="__foreach.current__"><span title="__foreach.current__">__foreach.current__</span></th>
+        </foreach>
+      </tr>
+    </thead>
+    <tbody>
+    <db.query sql="#$sql$" max="<dbtoolslib#query-rows-max />">
+      <tr>
+        <td>__loop.index__</td>
+        <foreach list="${cols}">
+          <switch value="__foreach.current__">
+            <case value="ENTRYID">
+              <td class="__foreach.current__" title="__foreach.current__"><dbtoolslib#result-column-fqid2entry fqidColumnName="__foreach.current__" /></td>
+            </case>
+            <case value="CONTACTID">
+              <td class="__foreach.current__" title="__foreach.current__"><dbtoolslib#result-column-fqid2entry fqidColumnName="__foreach.current__" /></td>
+            </case>
+            <case.default>
+              <td class="__foreach.current__" title="__foreach.current__"><html.encode>#$db.query.result[__foreach.current__]$</html.encode></td>
+            </case.default>
+          </switch>
+        </foreach>
+      </tr>
+      <loop.none>
+        <tr>
+          <td colspan="<foreach list='${cols}'><loop.last><jeval>__loop.index__ + 1</jeval></loop.last></foreach>">
+            No rows.
+          </td>
+        </tr>
+      </loop.none>
+    </db.query></tbody>
+  </table>
+</sdl.function>
