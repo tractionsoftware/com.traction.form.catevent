@@ -42,7 +42,10 @@
     "catevent": {
       "__inherits": "event",
       "display_name": "#{@catevent#form_catevent_display_name}",
-      "schema_elements": "project,goal,milestone,title,property_location,property_due,property_enddate,color,content,attachments,tags,property_assigned,property_edit_desc,property_catevent_subject,catevent_category,catevent_type,property_duration,event_target,catevent_relate_crm_company,catevent_relate_crm_contact,property_catevent_customer,catevent_target_crm_goal",
+      //"schema_elements": "project,goal,milestone,title,property_location,property_due,property_enddate,color,content,attachments,tags,property_assigned,property_edit_desc,property_catevent_subject,catevent_category,catevent_type,property_duration,event_target,catevent_relate_crm_company,catevent_relate_crm_contact,property_catevent_customer,catevent_target_crm_goal",
+
+      "schema_elements": "project,title,property_location,property_due,property_enddate,color,content,attachments,tags,property_assigned,property_edit_desc,property_catevent_subject,catevent_category,catevent_type,property_duration,event_target,catevent_relate_crm_company,catevent_relate_crm_contact,property_catevent_customer,catevent_target_crm_goal",
+
       "field_title_value": "[[ /token catevent_title ]]",
       "field_property_duration_placeholder_text": "Auto",
       "field_catevent_category_required": "true",
@@ -256,7 +259,7 @@
       "sdl": "com.traction.sdl.fields.text#entry-reference-bucket-value"
     },
     "catevent_target_crm_goal": {
-      "sdl": "com.traction.catevent.sdl.fields.text#crm-goal"
+      "sdl": "com.traction.catevent.sdl.fields.text#target-crm-goal"
     },
     "event_dur_ev": {
       "sdl": "com.traction.catevent.sdl.fields.text#event-duration-ev-hours-formatted2"

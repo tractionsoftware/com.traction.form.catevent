@@ -15,10 +15,9 @@
       <#labelname-bucket-target maxResults="" />
 </sdl.function>
 
-<sdl.function name="crm-goal">bbbb
-  <entry.goals entrytypesfilter="crm_goal">aaaa
-    __entry.tractionid.fqid__
-  </entry.goals>
+<sdl.function name="target-crm-goal">
+  <console>crm-goal text  ssss</console>
+  I wonder why this does't work!!!
 </sdl.function>
 
 <sdl.function name="labelname-bucket-target">
