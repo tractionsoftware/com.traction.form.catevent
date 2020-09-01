@@ -60,9 +60,9 @@ setting_catevent_phase_tip=ひとつずつ改行してください。
 setting_catevent_phase_list_display_name=進行段階
 setting_catevent_phase_list_opt1=計画
 setting_catevent_phase_list_opt2=着手
-setting_catevent_phase_list_opt3=中断
-setting_catevent_phase_list_opt4=検証
-setting_catevent_phase_list_opt5=完了
+setting_catevent_phase_list_opt3=検証
+setting_catevent_phase_list_opt4=完了
+setting_catevent_phase_list_opt5=中断
 
 setting_catevent_form_loc_type_display_name=投稿/編集フォームのロケーター タイプ
 setting_catevent_form_loc_type_description=投稿/編集フォームの上部に、[スペース] に加えて [プロジェクト] と [マイルストーン] のドロップダウンリストを表示するかどうかを選択します。
