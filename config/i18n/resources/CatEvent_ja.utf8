@@ -93,7 +93,7 @@ setting_catevent_display_customer_field_tip=CRM プラグインが未インス�
 
 setting_catevent_title_format_display_name=タイトルの書式
 setting_catevent_title_format_description=予定記事のタイトルは、ここで設定された書式で表示されます。<br>\
-利用可能: %subject%, %entryid%, %space%, %date%, %location%, %start%, %end%, %invitee%, %author%, %category%, %type%
+利用可能: %subject%, %entryid%, %space%, %date%, %location%, %start%, %end%, %invitee%, %author%, %category%, %phase%, %crmcompany%, %crmcontact%, %crmgoal%
 setting_catevent_title_format_tip=
 setting_catevent_title_format_default=%category% %subject%
 
