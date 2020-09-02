@@ -30,7 +30,7 @@ indexentrytype_catevent_display_name=予定
 indexentrytype_type_filter_display_name=予定
 
 # Entry Fields
-entry_field_catevent_subject_display_name=タイトル
+entry_field_catevent_subject_display_name=件名
 entry_field_catevent_customer_display_name=顧客名
 entry_field_catevent_category_display_name=カテゴリー
 entry_field_catevent_phase_display_name=タイプ
